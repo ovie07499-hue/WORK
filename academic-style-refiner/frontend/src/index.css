@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --color-ink-50: #f6f7f9;
+  --color-ink-100: #eceef2;
+  --color-ink-200: #d5d9e2;
+  --color-ink-300: #b0b8c7;
+  --color-ink-500: #6a7488;
+  --color-ink-700: #3c4557;
+  --color-ink-900: #1b2130;
+  --color-navy-600: #2a4d7a;
+  --color-navy-700: #1e3a5f;
+  --color-navy-800: #172d4a;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  @apply bg-ink-50 text-ink-900 font-sans;
+}
+
+.prose-academic {
+  @apply font-serif text-[15.5px] leading-7 text-ink-900;
+}
+
+ins.diff-add {
+  @apply rounded-sm bg-emerald-100 text-emerald-900 no-underline decoration-emerald-400;
+}
+
+del.diff-del {
+  @apply rounded-sm bg-rose-100 text-rose-800 line-through decoration-rose-400/70;
+}
+
+/* Keep a replaced word and its replacement visually separate in the inline view. */
+del.diff-del + ins.diff-add,
+ins.diff-add + del.diff-del {
+  margin-left: 0.2em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-pulse-soft {
+    animation: pulse-soft 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}

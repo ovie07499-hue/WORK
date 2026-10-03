@@ -1,0 +1,13 @@
+[project]
+name = "academic-style-refiner"
+version = "1.0.0"
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "RUF"]
+# FastAPI's dependency idiom (File(...), Depends(...)) uses calls in argument defaults.
+ignore = ["B008", "RUF001", "RUF003"]
