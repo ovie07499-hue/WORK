@@ -84,10 +84,14 @@ oauth2-proxy, Cloudflare Access or an identity-aware proxy) and add per-user rat
 at the proxy. Inside the app, `REFINER_MAX_ACTIVE_JOBS` caps concurrent documents
 (further requests get HTTP 429) and `REFINER_MAX_WORDS` caps document size.
 
-Rough cost: each paragraph makes two calls (more on retries). A 10,000-word report is
-about 13k input tokens of text, so expect roughly 50-80k input and 40-70k output tokens
-per document including prompts, context and thinking, depending on intensity.
-Lower `REFINER_PASS1_EFFORT` or choose a cheaper model via `REFINER_MODEL` to reduce cost.
+Rough cost (estimated from token counts, not yet measured): each paragraph makes two
+calls, and every call resends the system prompt and the neighbouring paragraphs. A
+10,000-word report of ~60 paragraphs therefore uses about 200k input and 70-80k output
+tokens (including thinking), which is roughly **$2-3 on Claude Opus 5.5** ($4/$20 per
+million input/output tokens), about half that on Claude Sonnet 5.5. Regenerating one
+paragraph costs about 4 cents. Check real usage in the Claude Console after a few runs and
+set a monthly spend limit there. Lower `REFINER_PASS1_EFFORT` or choose a cheaper model via
+`REFINER_MODEL` to reduce cost.
 
 ## Scaling
 
